@@ -1,0 +1,29 @@
+services:
+  php:
+    image: yiisoftware/yii2-php:8.2-apache
+    working_dir: /app
+    volumes:
+      - ./:/app
+    ports:
+      - "8080:80"
+    environment:
+      DB_DSN: pgsql:host=postgres;port=5432;dbname=car_ads
+      DB_USER: car_ads
+      DB_PASSWORD: car_ads
+      COOKIE_VALIDATION_KEY: local-dev-key
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: car_ads
+      POSTGRES_USER: car_ads
+      POSTGRES_PASSWORD: car_ads
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+volumes:
+  postgres-data:
