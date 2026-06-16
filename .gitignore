@@ -7,4 +7,3 @@
 /tests/_output/*
 !/tests/_output/.gitkeep
 /.phpunit.result.cache
-/docs/defense-qa.md
