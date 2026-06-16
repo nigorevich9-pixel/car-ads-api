@@ -4,11 +4,11 @@ Last updated: 2026-06-16.
 
 ## Current State
 
-- PHP 8.1, Composer, PostgreSQL and required PHP extensions are installed in this workspace.
-- Composer dependencies are installed and `composer.lock` is generated.
-- Application code, migration, Docker Compose, README and unit-test are present.
-- Local PostgreSQL database `car_ads` exists, migrations are applied, and API smoke checks pass.
+- Application code, migration, Docker Compose, README and unit tests are present.
+- The API exposes endpoints for creating, reading and listing car advertisements.
+- The domain flow is separated into Controller, Request Model, Service, Repository, DataMapper, Entity and ActiveRecord layers.
+- `composer.lock` is committed for reproducible dependency installation.
 
 ## Notes
 
-- `docs/defense-qa.md` is intentionally ignored by git and should stay local for interview preparation.
+- Runtime availability depends on local PHP/PostgreSQL or Docker Compose setup.

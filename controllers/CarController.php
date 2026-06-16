@@ -5,7 +5,6 @@ namespace app\controllers;
 use app\mappers\CarDataMapper;
 use app\models\requests\CreateCarRequest;
 use app\services\CarService;
-use InvalidArgumentException;
 use yii\filters\ContentNegotiator;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
@@ -49,14 +48,14 @@ final class CarController extends Controller
         $request = new CreateCarRequest();
         $request->loadData((array) \Yii::$app->request->getBodyParams());
 
-        try {
-            $car = $this->service->createCar($request);
-        } catch (InvalidArgumentException $exception) {
+        if (!$request->validate()) {
             \Yii::$app->response->statusCode = 422;
             return [
-                "errors" => json_decode($exception->getMessage(), true) ?: ["request" => [$exception->getMessage()]],
+                "errors" => $request->getErrors(),
             ];
         }
+
+        $car = $this->service->createCar($request->getValidatedData());
 
         \Yii::$app->response->statusCode = 201;
         return $this->mapper->toResponse($car);
