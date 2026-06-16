@@ -1,0 +1,10 @@
+/vendor/
+/runtime/*
+!/runtime/.gitkeep
+/web/assets/*
+!/web/assets/.gitkeep
+/.env
+/tests/_output/*
+!/tests/_output/.gitkeep
+/.phpunit.result.cache
+/docs/defense-qa.md
