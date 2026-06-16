@@ -76,4 +76,16 @@ final class CreateCarRequest extends Model
     {
         return $this->hasOptions() ? $this->options : null;
     }
+
+    public function getValidatedData(): array
+    {
+        return [
+            "title" => $this->title,
+            "description" => $this->description,
+            "price" => $this->price,
+            "photo_url" => $this->photo_url,
+            "contacts" => $this->contacts,
+            "options" => $this->getOptionData(),
+        ];
+    }
 }

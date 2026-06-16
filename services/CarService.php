@@ -4,9 +4,7 @@ namespace app\services;
 
 use app\entities\Car;
 use app\entities\CarOption;
-use app\models\requests\CreateCarRequest;
 use app\repositories\CarRepositoryInterface;
-use InvalidArgumentException;
 
 final class CarService
 {
@@ -19,14 +17,10 @@ final class CarService
         $this->repository = $repository;
     }
 
-    public function createCar(CreateCarRequest $request): Car
+    public function createCar(array $data): Car
     {
-        if (!$request->validate()) {
-            throw new InvalidArgumentException(json_encode($request->getErrors()));
-        }
-
         $option = null;
-        $optionData = $request->getOptionData();
+        $optionData = $data["options"];
         if ($optionData !== null) {
             $option = new CarOption(
                 null,
@@ -41,11 +35,11 @@ final class CarService
 
         $car = new Car(
             null,
-            (string) $request->title,
-            (string) $request->description,
-            (float) $request->price,
-            (string) $request->photo_url,
-            (string) $request->contacts,
+            (string) $data["title"],
+            (string) $data["description"],
+            (float) $data["price"],
+            (string) $data["photo_url"],
+            (string) $data["contacts"],
             null,
             $option
         );
